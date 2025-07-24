@@ -13,14 +13,8 @@ const INITIAL_CONTACTS = [
 ];
 
 function App() {
-  const [contacts, setContacts] = useState(() => {
-    return JSON.parse(localStorage.getItem("contacts")) ?? INITIAL_CONTACTS;
-  });
+  const [contacts, setContacts] = useState([]);
   const [filter, setFilter] = useState("");
-
-  useEffect(() => {
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-  }, [contacts]);
 
   const addContact = (name, number) => {
     if (
