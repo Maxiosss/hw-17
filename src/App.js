@@ -1,31 +1,13 @@
 import { useState } from "react";
-import { nanoid } from "nanoid";
 import ContactForm from "./components/ContactForm";
 import ContactList from "./components/ContactList";
 import Filter from "./components/Filter";
+import useContacts from "./hooks/useContacts";
 import "./App.css";
 
-
 function App() {
-  const [contacts, setContacts] = useState([]);
+  const { contacts, addContact, deleteContact } = useContacts();
   const [filter, setFilter] = useState("");
-
-  const addContact = (name, number) => {
-    if (
-      contacts.some(
-        (contact) => contact.name.toLowerCase() === name.toLowerCase()
-      )
-    ) {
-      alert(`${name} is already in contacts.`);
-      return;
-    }
-    const newContact = { id: nanoid(), name, number };
-    setContacts((prev) => [...prev, newContact]);
-  };
-
-  const deleteContact = (id) => {
-    setContacts((prev) => prev.filter((contact) => contact.id !== id));
-  };
 
   const handleFilterChange = (e) => setFilter(e.target.value);
 
